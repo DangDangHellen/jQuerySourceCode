@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuerylh.js"></script>
+        <script src="jquery.js"></script>
+        <script>
+        	$(function(){
+        		$();         //返回一个简单的对象，selector和context都为undefined
+	        	$(function(){ alert(1)});
+	        	var ins = document.getElementById('ins');
+	        	$(ins);
+
+	        	$.noConflict();               //jQuery库释放掉$的使用权，而让我自己写的js库来用$
+
+	        	$();         //返回一个简单的对象，selector和context都为undefined
+	        	$(function(){ alert(1)});
+	        	var ins = document.getElementById('ins');
+	        	$(ins);
+        	})
+        	
+
+        </script>
+    </head>
+    <body>
+    	<input type="text"  id="ins" />
+    </body>
+</html>

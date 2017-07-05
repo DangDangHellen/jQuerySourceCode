@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuerylh.js"></script>
+        <script>
+        	_$ = window.$;
+			_jQuery = window.jQuery;        //先将上一个库的$和jQuery 保存起来
+        </script>
+        <script src="jquery.js"></script>
+        <script>
+			function noConflict(deep){
+				if(window.$ === jQuery)          //如果当前$是jQuery在使用，释放对$的使用权，让之前存的_$来使用$
+				{
+					window.$ = _$;
+				}
+				if(deep && window.jQuery === jQuery)
+				{
+					window.jQuery = _jQuery;
+				}
+				return jQuery;
+			}
+
+			noConflict();
+
+			
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
