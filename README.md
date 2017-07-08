@@ -38,3 +38,10 @@ jQuery对模块化的支持；jQuery1.7.2支持AMD； jQuery2.0支持AMD和COMMONJS。
 
 主要实现了jQuery入口模块，jQuery对象的创建，并且实现了两个库冲突时，$使用权的释放问题；
 即源码noConflict部分的等价代码，因为此时还没有涉及到jQuery的extend方法来扩展静态方法，所以先自己写了一个函数来实现。
+
+
+2017.7.8
+
+关于jQuery源码中，对jQuery对象创建时，起重要作用的init函数进行了梳理，主要是对selector的不同情况进行处理，最复杂的是selector为字符串的情况，包含了单标签，复杂标签，不完整标签以及ID，还有
+各种简单复杂选择器。
+这些都在博客中有分析。http://blog.csdn.net/u010046318/article/details/74729911
