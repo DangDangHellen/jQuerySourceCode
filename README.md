@@ -45,3 +45,6 @@ jQuery对模块化的支持；jQuery1.7.2支持AMD； jQuery2.0支持AMD和COMMONJS。
 关于jQuery源码中，对jQuery对象创建时，起重要作用的init函数进行了梳理，主要是对selector的不同情况进行处理，最复杂的是selector为字符串的情况，包含了单标签，复杂标签，不完整标签以及ID，还有
 各种简单复杂选择器。
 这些都在博客中有分析。http://blog.csdn.net/u010046318/article/details/74729911
+
+另： 分析了jQuery.fn对象（即jQuery原型）中的几个重点方法，主要包括：pushStack(),end(),  map(), each(),  eq(i), toArray(), slice()等等， 具体在http://blog.csdn.net/u010046318/article/details/74852745中有源码分析。
+上传的代码主要是对pushStack()以及end()方法的检验。

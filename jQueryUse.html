@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuery.js"></script>
+        <!-- <script src="jQuery.LH.1.1.0.js"></script> -->
+        <style>
+        </style>
+        <script>
+        	var res;
+        /*$(function(){
+        	var ins = document.getElementsByTagName('input');
+            res = $(ins);
+            console.log($(ins));
+
+            $('#128738-').css('width', '200px');
+            console.log($('#128738-'));
+
+            console.log(document.getElementById('128738-'));
+        })*/
+        /*$('');
+
+        $("<div>");*/
+
+        $('ul').children().css('border', '1px solid black');            //所有的li元素设border
+        $('ul').children().css('border', '1px solid black').css('background-color', 'yellow')    //所有的li元素设border和背景颜色
+        $('ul').children().css('border', '1px solid black').end().css('background-color', 'yellow')  //li元素设border,ul 元素设背景颜色
+        $('ul').children().css('border', '1px solid black').end().css('background-color', 'blue')   //li元素设border,ul 元素设背景颜色      
+
+
+        </script>
+    </head>
+    <body>
+    	<input id="btn" type="button" value="点击按钮" />
+        <input type="text" value="输入" />
+        <input type="text" id="128738-" />
+        <div class="box">一个小盒子</div>
+        <ul>
+            <li class='first'>
+                <a href="#" class="first">链接列表一</a>
+            </li>
+            <li>
+                <a href="#">链接列表二</a>
+            </li>
+        </ul>
+    </body>
+</html>
