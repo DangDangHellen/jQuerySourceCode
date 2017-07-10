@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuery.js"></script>
+        <!-- <script src="jQuery.LH.1.1.0.js"></script> -->
+        <style>
+        </style>
+        <script>
+        	var res;
+        /*$(function(){
+        	var ins = document.getElementsByTagName('input');
+            res = $(ins);
+            console.log($(ins));
+
+            $('#128738-').css('width', '200px');
+            console.log($('#128738-'));
+
+            console.log(document.getElementById('128738-'));
+        })*/
+        /*$('');
+
+        $("<div>");*/
+
+       /* $('ul').children().css('border', '1px solid black');            //所有的li元素设border
+        $('ul').children().css('border', '1px solid black').css('background-color', 'yellow')    //所有的li元素设border和背景颜色
+        $('ul').children().css('border', '1px solid black').end().css('background-color', 'yellow')  //li元素设border,ul 元素设背景颜色
+        $('ul').children().css('border', '1px solid black').end().css('background-color', 'blue')   //li元素设border,ul 元素设背景颜色      */
+
+        /*$('<li>苹果</li>')*/
+
+        //测试jQuery.buildFragment函数
+       /* var res = jQuery.buildFragment( ['<ul><li>苹果</li><li>柠檬</li></ul>'] , [document])
+        console.log(res);
+
+        //测试jQuery.clean函数
+        var res1 = jQuery.clean(['<ul><li>苹果</li><li>柠檬</li></ul>', '<div></div>'], [document])
+        console.log(res1);
+        
+        $.clean(["<ul><li><a></a></li></ul>"], [document]);
+
+        var res2 = $.clean(['<option></option>'], [document]);
+        console.log(res2);*/
+
+       //jQuery的extend方法以及实例extend方法
+       //按照参数分的，如果只有一个对象参数，则认为是扩展插件的方法
+       //如果多个参数对象，则将后面对象的内容扩展到第一个对象上，这里又有深拷贝和浅拷贝的概念
+        /*var a = {
+            name: 'liu', 
+            family: 'lintong'
+        }
+        var b = {
+            name: 'yang', 
+            age: 25
+        }
+        
+        $.extend(a, b);  
+        
+        a.name = 'Hellen';
+
+        console.log(a.name);               //Hellen
+        console.log(b.name);               //yang                  默认是浅拷贝，a.name的改变不会影响b.name
+
+
+        var a = {
+            name: 'liu', 
+            family: 'lintong'
+        }
+        var b = {
+            name: {
+                age: 25
+            } 
+        }
+        
+        $.extend(a, b);  
+
+
+        //但是如果把a.name.age改了，会对b有影响
+        a.name.age = 30;
+
+        console.log(a.name.age);
+        console.log(b.name.age); */         //因为a和b的name属性是引用类型，指向了同一块内存区域
+
+        //因此如果做深拷贝
+        //a.name.age不会影响b.name.age
+        /*var a = {
+            name: {
+                age: 20
+            }
+        }
+        var b = {
+            name: {
+                family: 'lt',
+                age: 30
+            }
+        }
+        console.log(a);
+        console.log(b);
+        $.extend( true, a, b);
+
+        a.name.age = 0;
+        console.log(a.name.age);
+        console.log(b.name.age);*/
+
+        //另一个用法：jQuery插件（全局插件和对象插件），分别是jQuery.extend和$.fn.extend的实现  
+        /*$.extend({
+            add: function(a, b){
+                return (a + b);
+            }
+        });
+
+        $.fn.extend({
+            add: function(a, b){
+                return (a + b);
+            }
+        })  
+
+        var res1 = $.add(3,6);
+        var res2 = $().add(1,9);*/
+
+
+        /*一个朋友阿里一面的时候，有问到extend实现继承时，如何避免覆盖？*/
+        /*这里需要强调一下，extend方法是扩展对象的方法，即得到的结果是个对象，并且这个对象拥有参数中的属性和方法，也就相当于继承。不过这个操作不会影响参数的变化，而是返回一个target对象，这个对象中包含参数对象中的属性和方法*/
+        var a = {
+            name: 'liu'
+        }
+        var b = {
+            name: 'yang'
+        }
+
+        var aa = {
+            a : a
+        }
+        var bb = {
+            b: b
+        }
+        /*var target = $.extend(a, b);*/
+        var target1 = $.extend(aa, bb);
+        </script>
+    </head>
+    <body>
+    	<input id="btn" type="button" value="点击按钮" />
+        <input type="text" value="输入" />
+        <input type="text" id="128738-" />
+        <div class="box">一个小盒子</div>
+        <ul>
+            <li class='first'>
+                <a href="#" class="first">链接列表一</a>
+            </li>
+            <li>
+                <a href="#">链接列表二</a>
+            </li>
+        </ul>
+    </body>
+</html>
