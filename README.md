@@ -48,3 +48,8 @@ jQuery对模块化的支持；jQuery1.7.2支持AMD； jQuery2.0支持AMD和COMMONJS。
 
 另： 分析了jQuery.fn对象（即jQuery原型）中的几个重点方法，主要包括：pushStack(),end(),  map(), each(),  eq(i), toArray(), slice()等等， 具体在http://blog.csdn.net/u010046318/article/details/74852745中有源码分析。
 上传的代码主要是对pushStack()以及end()方法的检验。
+
+2017.7.10
+关于jQuery源码中extend函数的用法
+在应用层面上，我们可以用extend函数做对象扩展，分别涉及到深拷贝和浅拷贝，这个会在博客里面分析；
+另一种用法就是利用extend函数来扩展插件，分别包括全局插件（扩展到jQuery上）和实例插件（扩展到jQuery对象上）。
