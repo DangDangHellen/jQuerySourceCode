@@ -2,7 +2,7 @@
 * @Author: hellen
 * @Date:   2017-06-28 16:04:43
 * @Last Modified by:   hellen
-* @Last Modified time: 2017-07-08 17:34:26
+* @Last Modified time: 2017-07-18 16:33:34
 */
 
 /*'use strict';*/
@@ -24,11 +24,13 @@
 			return new jQuery.fn.init(selector, context);
 		}
 		
-	var quickExpr = /^(?:[^#<]*(<[\w\W]+>)[^>]*$|#([\w\-]*)$)/;          //匹配标签和id选择器
-	var rsingleTag = /^<(\w+\s*)\/?>(?:<\/\1>)?$/;
+		var quickExpr = /^(?:[^#<]*(<[\w\W]+>)[^>]*$|#([\w\-]*)$)/;          //匹配标签和id选择器
+		var rsingleTag = /^<(\w+\s*)\/?>(?:<\/\1>)?$/;
 		jQuery.fn = jQuery.prototype = {
 			constructor: jQuery,
 
+			jquery: '1.7.2.LH'
+			length: 0,
 			//可能的情况
 			//$(DOM 元素)；   $(function(){});    $('')
 			//下面的都是选择器为字符串的形式
@@ -38,7 +40,6 @@
 				/*this.person = selector;
 				this.name = context;
 				return this;*/
-
 				//情况一: 输入参数为null,undefined或者""
 				if(! selector)
 				{
@@ -71,7 +72,6 @@
 						//如果是id选择器$('#id') , match = ['#id', undefined, 'id'];
 						//如果是其他情况，match = null;
 					}
-
 					//上面得到了match数组，不同情况对应不同的值；下来根据不同结果再分
 					if(match && (match[1] || !context))    //所有match为真的情况
 					{
@@ -84,7 +84,7 @@
 							//所以context还是有必要的
 							context = context instanceof jQuery ? context[0] : context;
 							doc = context ? (context.ownerDocument || context) : document;
-
+								
 							//在判断是否是单标签
 							ret = rsingleTag.exec(selector);
 
@@ -129,41 +129,198 @@
 					}
 				}
 
-				//输入参数为DOM数组
-				/*if(selector.length > 1 && selector[0].nodeType)
-				{
-					this.context = this[0] = selector[0];
-					
-					this.length = selector.length;
-					
-					for(var i = 0; i < selector.length; i++)
-					{
-						this[i] = selector[i];
-					}
-					return this;
-				}*/
-
 				//输入参数为函数，只有一种用法：$(function(){})相当于$.ready(function(){})
 				if( typeof selector == 'function')
 				{
 					return this;
 				}
-
 				/*this.person = selector;
 				this.name = context;*/
 				return this;
 			},
-			sayHello : function(){
+			/*sayHello : function(){
 				console.log(this);
+			}*/
+			size: function(){
+				return this.length;
+			},
+			toArray: function(){
+				this.slice(0);
+			},
+			pushStach(){
+
+			},
+			each(){
+
+			},
+			map: function(){
+
+			},
+			get: function(i){
+
+			},
+			first(){
+
+			},
+			eq(num){
+
+			},
+			last(){
+				
+			},
+			//关于ready函数
+			ready: function(fn){
+				jQuery.bindReady();
+				readyList.add(fn);
+				return this;
 			}
+
 		};
+
+
+
 		jQuery.fn.init.prototype = jQuery.fn;
 
-		
+		if( document.addEventListener )
+		{
+			complete = function(){
+				document.removeEventListener( 'DOMContentLoaded' , complete, false);
+				jQuery.ready();
+			}
+		} else if(document.attachEvent) {
+			complete = function(){
+
+				if( document.readyState == 'complete' )
+				{
+					window.detachEvent( 'onreadystatechange', complete );
+					jQuery.ready();
+				}
+			}
+		}
+
+		jQuery.extend = jQuery.fn.extend = function(){
+			target = arguments[0] || {};
+			deep = false;
+			i = 1;
+			if(typeof target === 'boolean')
+			{
+				deep = target;
+				target = arguments[1] || {};
+				i = 2;
+			}
+
+			if(typeof target !== 'object' || /*typeof target !== 'function'*/ !jQuery.isFunction(target))
+			{
+				target = {};
+			}
+
+			if(arguments.length == i)
+			{
+				target = this;
+				--i;
+			}
+
+			for(; i < arguments.length; i++)
+			{
+				if(options = arguments[i])
+				{
+					for(name in options)
+					{
+						src = target[name];
+						copy = options[name];
+
+						if(copy == target)
+						{
+							continue;
+						}
+						if(deep && copy && (jQuery.isPlainObejct(copy)) || (copyArray = jQuery.isArray(copy)))
+						{
+							if(copyArray)
+							{
+								copyArray = false;
+								clone = src && jQuery.isArray(src) ? src : [];
+							}
+							else
+							{
+								clone = src && jQuery.isPlainObject(src) ? src : {};
+							}
+
+							target[name] = jQuery.extend( deep, clone, copy );
+						} else {
+							if( copy !== undefined)
+							{
+								target[name] = copy;
+							}
+						}
+					}
+				}
+			}
+
+			return target;
+		}
+
+		jQuery.extend({
+			noConfilict: function(){
+
+			},
+			holdReady: function( hold ){
+				if( hold )
+				{
+					readyWait++;
+				}
+				else
+				{
+					return;
+				}
+			},
+			bindReady: function(){   //监听是否加载好
+				if(readyList)
+				{
+					return;
+				}
+
+				readyList = jQuery.Callbacks('once memory');
+				if(document.readyState === 'complete')
+				{
+					setTimeout( jQuery.ready, 1);
+				}
+
+				if( document.addEventListener )
+				{
+					document.addEventListener( 'DOMContentLoaded', complete, false);
+					window.addEventListener( "load", jQuery.ready, false );
+				} else if(document.attachEvent) {
+					document.attachEvent( 'onreadystatechange', complete);
+					window.attachEvent( 'onload', jQuery.ready);
+				}
+
+			}
+			ready: function( wait ){  //加载好了就触发回调函数；
+				if( ( wait && !--ReadyWait ) || ( !wait && !jQuery.isReady ) ) { 
+					if( !document.body)
+					{
+						return setTimeout( jQuery.ready , 1);
+					}
+				}
+
+				if( wait && --ReadyWait > 0)
+				{
+					return;
+				}
+
+				jQuery.isReady = true;
+
+				readyList.fireWith( document, [jQuery]);
+
+				if( jQuery.fn.trigger )
+				{
+					jQuery(document).trigger('ready').off('ready');
+				}
+			}
+		})
+			
 
 
 		window.$ = window.jQuery = jQuery;
-	})();
-
-	
+	})();	
 })(window);

@@ -1,3 +1,10 @@
+/*
+* @Author: hellen
+* @Date:   2017-07-03 11:39:22
+* @Last Modified by:   hellen
+* @Last Modified time: 2017-07-18 15:29:26
+*/
+
 /*!
  * jQuery JavaScript Library v1.7.2
  * http://jquery.com/
@@ -123,7 +130,6 @@ jQuery.fn = jQuery.prototype = {
 		// Handle HTML strings
 		if ( typeof selector === "string" ) {
 			// Are we dealing with HTML string or an ID?
-			// 去匹配标签
 			if ( selector.charAt(0) === "<" && selector.charAt( selector.length - 1 ) === ">" && selector.length >= 3 ) {
 				// Assume that strings that start and end with <> are HTML and skip the regex check
 				match = [ null, selector, null ];
@@ -158,7 +164,7 @@ jQuery.fn = jQuery.prototype = {
 						selector = ( ret.cacheable ? jQuery.clone(ret.fragment) : ret.fragment ).childNodes;
 					}
 
-					return jQuery.merge( this, selector );
+					return jQuery.merge( this, selector );     //this.length自己在merge函数中有增加
 
 				// HANDLE: $("#id")
 				} else {
@@ -416,7 +422,7 @@ jQuery.extend({
 	},
 
 	// Handle when the DOM is ready
-	ready: function( wait ) {
+	ready: function( wait ) {       
 		// Either a released hold or an DOMready/load event and not yet ready
 		if ( (wait === true && !--jQuery.readyWait) || (wait !== true && !jQuery.isReady) ) {
 			// Make sure body exists, at least, in case IE gets a little overzealous (ticket #5443).
@@ -453,7 +459,7 @@ jQuery.extend({
 		// browser event has already occurred.
 		if ( document.readyState === "complete" ) {
 			// Handle it asynchronously to allow scripts the opportunity to delay ready
-			return setTimeout( jQuery.ready, 1 );
+			return setTimeout( jQuery.ready, 1 );      //处理IE的问题，它会提前触发ready，所以延迟一下
 		}
 
 		// Mozilla, Opera and webkit nightlies currently support this event
