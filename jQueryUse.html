@@ -177,14 +177,29 @@
             alert('Yes');
         })*/
 
-        $(function(){
+        /*$(function(){
             console.log("Yes");
         })
 
         $(function(){
             console.log("Hello");
-        })
+        })*/
 
+        //isPlainObject方法测试
+        var obj = new String('AHB');
+        res = jQuery.isPlainObject(obj);
+
+        function Person(name){
+            this.name = name;
+        }
+        function Stu(job, name)
+        {
+            this.job = job;
+            this.name = name;
+        }
+
+        var p = new Person("Liu");
+        var s = new Stu("Student", "Liu");
         </script>
     </head>
     <body>
