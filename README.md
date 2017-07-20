@@ -69,3 +69,6 @@ jQuery对模块化的支持；jQuery1.7.2支持AMD； jQuery2.0支持AMD和COMMONJS。
 2017.7.19
 
 今天阅读了jQuery静态方法中的关于类型检测的几个方法，逻辑比较复杂的一个并且比较重点的一个方法是isPlainObject方法。考虑得很全面。代码中测试了几种情况。详细分析见博客http://blog.csdn.net/u010046318/article/details/75353858
+
+2017.7.20
+今天分析了jQuery静态方法中的 map,each,grep; makeArray, inArray以及merge方法。这几个方法用的比较多，原理上也简单易懂。

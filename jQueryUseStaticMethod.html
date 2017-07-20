@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuery.js"></script>
+        <script>
+
+        	//$.each()方法测试
+        	/*var arr = [2,3,5,9];
+	    	var res = $.each(arr, function(i, item){
+	    		if(item > 2)
+	    		{
+	    			console.log(item);
+	    		}
+				console.log(i + ' ' + item);
+	    	})*/
+
+			/*var obj = {
+				name: 'Liu',
+				job: 'stu',
+				age: 22,
+				height: 157,
+				weight: 45
+			}
+			var res = $.each(obj, function(i, item){
+				console.log(i);
+				console.log(item);
+	    	})*/
+
+/*			var obj = {
+				name: 'Liu',
+				job: 'stu',
+				age: 22,
+				height: 157,
+				weight: 45
+			}
+			var level = 'top';
+			var name = 'liu';
+			var res = $.each(obj, function(){
+				console.log(arguments[0]);
+				console.log(arguments[1]);
+				console.log(arguments);
+	    	}, [level, name]);*/
+
+			/*var obj = {
+				length: 1,
+				0: function(){
+					console.log('Hello');
+				}
+			}
+			var res = $.each(obj, function(i, item){
+				console.log(i);
+				console.log(item)
+	    	});*/
+
+			/*var obj = function(){
+				console.log('a');
+			}
+			var res = $.each(obj, function(i, item){
+				console.log(i);
+				console.log(item)
+	    	});*/
+
+			//map方法
+			/*var obj = [3,5,7,9,2, 4, 6, 8];
+			res = $.map(obj, function( item, i){
+				if(item % 2 == 0)
+				{
+					return item;
+				}
+			});*/
+
+			/*var obj = [ [1,2,3], [4,5,6]];
+			res = $.map(obj, function( item, i){
+				return item;
+			});*/
+
+			//makeArray方法
+			/*var o1 = {
+				name: 'Liu',
+				age: 22,
+				length: 2
+			}
+			var o2 = [2,8,1,9,4];
+			
+			var o3 = 'absjhce';
+
+			var o4 = function(){
+				console.log('Hello');
+			}
+
+			var res1 = $.makeArray(o1);
+			var res2 = $.makeArray(o2);
+			var res3 = $.makeArray(o1, o2);
+
+			var res3 = $.makeArray(o2, o1);*/
+
+			/*var s = [4,3,1];
+			var res3 = $.makeArray(s, {length: 3});*/
+
+			//inArray方法
+			/*var o2 = [2,8,1,9,4];
+			var res = $.inArray(4, o2, 2);     //返回4
+			var res1 = $.inArray(0, o2, 2);*/
+
+			/*var obj = {
+				name: 'Hellen',
+				age: 22
+			}*/
+			/*var obj = 'liuhusn';
+			var res2 = $.inArray('liu', obj);*/
+
+			//merge方法
+			/*var arr1 = { 0: 'li', 1: 'ul', length: 2 };
+			var arr2  = { 0: 'Hellen', 1: 'stu' };
+			$.merge(arr1, arr2);*/
+
+			//grep方法（过滤函数？？？）
+			/*var arr = [4,2,8,6,4,3,0,6];
+			var res = $.grep(arr, function(item, i){
+				return item > 4;               //过滤条件,返回一个数组
+			});
+			var res1 = $.grep(arr, function(item, i){
+				return item > 4;               //过滤条件,返回一个数组
+			}, true);*/
+			
+			
+
+        </script>
+    </head>
+    <body>
+		<ul>
+			<li>Apple</li>
+			<li>pitch</li>
+			<li>orange</li>
+		</ul>
+    </body>
+</html>
