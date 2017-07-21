@@ -72,3 +72,6 @@ jQuery对模块化的支持；jQuery1.7.2支持AMD； jQuery2.0支持AMD和COMMONJS。
 
 2017.7.20
 今天分析了jQuery静态方法中的 map,each,grep; makeArray, inArray以及merge方法。这几个方法用的比较多，原理上也简单易懂。
+
+2017.7.21
+对于jQuery的Callbacks对象在功能上进行分析，以及了解了options参数各种情况的测试。

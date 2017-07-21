@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuery.js"></script>
+        <script>
+        	/*function a1(){
+        		console.log(111);
+        	}
+        	function a2(){
+        		console.log(222);
+        	}
+
+        	var c = $.Callbacks();
+        	c.add(a1);
+        	c.add(a2);
+
+        	c.fire();*/
+
+        	/*function a1(){
+        		console.log(111);
+        	}
+        	function a2(){
+        		console.log(222);
+        	}
+        	function a3(){
+        		console.log(333);
+        	}
+
+        	var cb = $.Callbacks('once');
+
+        	cb.add([a1,a2,a3]);
+
+
+        	cb.fire();
+
+        	cb.remove(a2);
+
+        	cb.fire();*/
+
+			function a1(){
+        		console.log(111);
+        		/*return false;*/
+        	}
+        	function a2(){
+        		console.log(222);
+        	}
+        	function a3(){
+        		console.log(333);
+        	}
+
+        	//var cb = $.Callbacks('once memory');
+        	/*var cb = $.Callbacks('once memory unique');
+
+        	cb.add(a1);
+
+        	cb.add(a1);
+
+        	cb.fire();
+
+        	cb.add([a2,a3]);*/
+
+        	var cb = $.Callbacks('stopOnFalse');
+
+        	cb.add([a1, a2, a3]);
+
+        	cb.fire();
+
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
