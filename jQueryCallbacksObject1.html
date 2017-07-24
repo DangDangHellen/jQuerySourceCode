@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuery.js"></script>
+        <script>
+
+        	var isFirst = true; 
+
+        	function a1(){
+				console.log(this);
+        		/*console.log(111);*/
+        		alert(111);
+        		/*if(isFirst)
+        		{
+        			cb.fire();
+        			isFirst = false;
+        		}*/
+        		                 //陷入循环。永远交替输出111和222；
+        		return false;
+        	}
+        	function a2(){
+        		console.log(this);
+        		/*console.log(222);*/
+        		alert(222);
+        	}
+        	function a3(){
+        		console.log(this);
+        		/*console.log(333);*/
+        		alert(333);
+        	}
+
+        	var cb = $.Callbacks('memory');
+        	/*cb.add(a1);
+        	cb.add(a2);
+        	cb.fire(); */    //这个fire函数执行时，先执行function a1里面的fire函数，这个fire函数先将list数组中的函数执行一遍，结束之后function a1 执行结束，接着执行function a2。
+
+        	cb.add(a1);
+
+        	cb.fire();
+
+        	cb.lock();
+
+        	cb.add(a2);               //此时111和222都会输出.add方法中直接调的是fire私有方法。
+
+        	cb.fire();
+
+			
+			/*cb.add(a1);
+
+        	cb.fire();
+
+        	cb.disable();
+
+        	cb.add(a2);              //将后续的所有操作都禁止了*/
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
