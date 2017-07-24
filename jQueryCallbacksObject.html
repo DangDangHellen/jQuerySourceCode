@@ -39,13 +39,16 @@
         	cb.fire();*/
 
 			function a1(){
+				console.log(this);
         		console.log(111);
-        		/*return false;*/
+        		return false;
         	}
         	function a2(){
+        		console.log(this);
         		console.log(222);
         	}
         	function a3(){
+        		console.log(this);
         		console.log(333);
         	}
 
@@ -60,12 +63,31 @@
 
         	cb.add([a2,a3]);*/
 
-        	var cb = $.Callbacks('stopOnFalse');
+        	/*var cb = $.Callbacks('stopOnFalse');
 
         	cb.add([a1, a2, a3]);
 
-        	cb.fire();
+        	cb.fire();*/
 
+        	cb = $.Callbacks('memory');
+        	cb.add(a1);
+        	
+
+        	/*cb.fire();*/
+        	cb.fire();                 //this指向cb对象
+
+        	cb.fireWith();             //this指向Window对象
+
+        	cb.add(a2);                //this指向Window对象
+
+        	cb.fireWith(cb);             //this指向cb对象
+
+        	cb.add(a2);                //this指向cb对象
+        	
+        	
+
+        	/*cb.add(function(){ console.log("444"); });
+        	cb.fire();*/
 
         </script>
     </head>

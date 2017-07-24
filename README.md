@@ -75,3 +75,7 @@ jQuery对模块化的支持；jQuery1.7.2支持AMD； jQuery2.0支持AMD和COMMONJS。
 
 2017.7.21
 对于jQuery的Callbacks对象在功能上进行分析，以及了解了options参数各种情况的测试。
+
+2017.7.24
+对于jQuery 的Callbacks回调模块进行整理。并对fireWith函数做了测试，必须传入参数，不传参数，this表示的是全局对象Window，如果后面直接add函数（带memory标志），此时this的指向也指向Window对象。
+测试代码已上传。
