@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuery.js"></script>
+        <script>
+        function a1(){
+        	alert(111);
+        }
+        function a2(){
+        	alert(222);
+        }
+
+        /*var cb = $.Callbacks();
+
+        setTimeout( function(){
+        	a1();
+        	cb.fire();
+        }, 1000);
+
+        cb.add(a2);*/
+
+        var dfd = $.Deferred();
+
+        /*setTimeout( function(){
+        	a1();
+        	dfd.reject();
+        }, 1000);
+
+        dfd.fail(a2);*/
+        /*setTimeout( function(){
+        	a1();
+        	dfd.resolve();
+        }, 1000);
+
+        dfd.done(a2);*/
+
+        /*setTimeout( function(){
+        	dfd.resolve();
+        	dfd.done(function(){     
+        		alert(111);
+        	});
+        }, 1000);*/
+
+        /*setTimeout( function(){             //并不会执行fail回调列表中的函数；因为dfd.resolve之后，stack设为undefined，因此后续不会再执行fire，fireWith.但可以执行done(add)，因为list设为了[];
+        	dfd.reject();
+        }, 2000);
+
+        dfd.done(function(){
+        	alert("Yes");
+        }).fail(function(){
+        	alert('No!');
+        });*/
+
+		alert(dfd.state());
+
+		setTimeout( function(){
+			dfd.resolve();
+
+			alert(dfd.state())
+
+		}, 1000);
+
+		dfd.done(function(){
+			alert(111);
+		}).fail(function(){
+			alert(222);
+		});
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

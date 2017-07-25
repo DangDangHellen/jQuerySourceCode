@@ -81,3 +81,9 @@ jQuery对模块化的支持；jQuery1.7.2支持AMD； jQuery2.0支持AMD和COMMONJS。
 测试代码已上传。
 
 另外一个是对Callbacks中 lock和disable方法进行对比；lock只是锁定住数组，不会执行self对象中的fire函数；而disable不会执行后面的任何操作。
+
+
+2017.7.25
+Deferred对象是对Callbacks的一个延伸，Deferred对象维护了3个不同的回调列表，分别表示成功回调列表，失败回调函数列表，进度回调函数列表。
+通过触发不同的函数来调用不同回调对象的add 和fire方法，从而实现异步。
+并对延迟对象的各个函数功能进行了测试。

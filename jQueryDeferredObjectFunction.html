@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuery.js"></script>
+        <script>
+        	var dfd = $.Deferred();
+
+        	//Dferred对象 state方法
+        	alert(dfd.state());
+
+			setTimeout( function(){
+				dfd.resolve();
+
+				/*dfd.reject();*/
+
+				alert(dfd.state())
+
+			}, 1000);
+
+			/*dfd.done(function(){
+				alert(111);
+			}).fail(function(){
+				alert(222);
+			});*/
+
+			//延迟对象的then方法: 分别对done, fail, process添加回调函数
+			/*dfd.then(function(){ alert(111) }, function(){ alert(222) }, function(){ alert(333) });*/
+
+			//延迟对象的always方法: 不管哪个状态触发，回调函数都执行
+			/*dfd.always(function(){
+				alert("NoNo");
+			});*/
+
+			//延迟对象的pipe方法，实现结果与then是相同的；但功能不同？？？
+			/*dfd.pipe(function(){ alert(111) }, function(){ alert(222) }, function(){ alert(333) });*/
+
+			var p = dfd.promise();    //返回一个延迟对象，但是没有resolve,reject和notify方法
+
+			
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
