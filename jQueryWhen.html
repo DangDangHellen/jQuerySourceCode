@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jQuery.js"></script>
+        <script>
+        	/*$.when().done(function(){
+        		alert("成功");
+        	}).fail(function(){
+        		alert("失败");
+        	});*/
+
+			function a(){
+				var dfd = $.Deferred();
+
+				/*dfd.resolve();*/
+                dfd.notify();
+				return dfd;
+			}
+
+			function b(){
+				var dfd = $.Deferred();
+
+				/*dfd.resolve();*/
+                dfd.notify();
+				//dfd.reject();
+
+				return dfd;
+			}
+
+        	/*var wdfd = $.when( a(), b() ).done(function(){             
+        	//当所有延迟对象都是resolve状态时，最终才会执行添加到doneList中的回调函数
+        	//有一个延迟对象返回reject状态，最终都会执行添加到fialList中的回调函数;
+        		alert("成功");
+        	}).fail(function(){
+        		alert("失败");
+        	});
+
+
+        	wdfd.done(function(){
+        		alert("回调一");
+        	})
+        	wdfd.done(function(){
+        		alert("回调二");
+        	})*/
+
+            /*$.when( 'aaa', 'bbb').done(function(){
+                alert(arguments[0]);
+                alert(arguments[1]);
+                alert('Yes');
+            }).fail(function(){
+                alert('No');
+            })*/
+
+            //when里面的参数只有 为延迟对象时才起作用，其他函数或者对象或者数据，都不起作用，直接执行doneList里面的回调函数了
+            /*$.when().done(function(){
+
+            }).fail(function(){
+
+            })*/
+
+            //0个参数 或者 一个不是延迟对象的参数 （走同一个分支）
+            //如果多于两个参数，走另外一个分支； 当参数不是延迟对象时，直接减减count，若count为0，则fire；
+            /*$.when(213, 'abs').done(function(){
+                alert("Yes");
+            }).fail(function(){
+                alert('No');
+            })*/
+
+            //如果只有一个参数，并且是延迟对象
+            //直接return promise延迟对象，没有resolve, reject, progress方法了。因为状态已经确定了。
+            /*$.when(a()).done(function(){
+                alert(arguments[0]);
+                alert('Yes');
+            }).fail(function(){
+                alert('No');
+            })*/
+
+            //如果参数多个，并且全都是延迟对象
+            /*$.when(a(), b()).done(function(){
+                alert(arguments[0]);
+                alert('Yes');
+            }).fail(function(){
+                alert('No');
+            })*/
+
+
+            //验证when 里面，对 promise添加回调，是否会在deferred.resolve触发时，执行之前添加的回调函数
+            /*var dfd = $.Deferred();
+
+            setTimeout( function(){
+                //dfd.resolve();
+                //dfd.reject();
+            }, 1000);
+
+            dfd.promise().done(function(){
+                alert("Yes");
+            }).fail(function(){
+                alert("No");
+            })*/
+
+            //progress和done是一样的逻辑；
+            //只是fail，有一个fail,便触发deferred.reject()
+            $.when(a(), b()).done(function(){
+                alert('Yes');
+            }).fail(function(){
+                alert('No')
+            }).progress(function(){
+                    alert('Progress');
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
