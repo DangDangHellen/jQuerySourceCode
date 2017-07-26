@@ -2,7 +2,7 @@
 * @Author: hellen
 * @Date:   2017-06-28 16:04:43
 * @Last Modified by:   hellen
-* @Last Modified time: 2017-07-18 16:33:34
+* @Last Modified time: 2017-07-26 17:52:56
 */
 
 /*'use strict';*/
@@ -260,7 +260,8 @@
 		}
 
 		jQuery.extend({
-			noConfilict: function(){
+			noConflict: function(){
+				
 
 			},
 			holdReady: function( hold ){
@@ -270,7 +271,7 @@
 				}
 				else
 				{
-					return;
+					jQuery.ready(true);
 				}
 			},
 			bindReady: function(){   //监听是否加载好
@@ -303,24 +304,200 @@
 					}
 				}
 
-				if( wait && --ReadyWait > 0)
+				if( wait && --ReadyWait > 0)        //还得等待
 				{
 					return;
 				}
 
 				jQuery.isReady = true;
 
-				readyList.fireWith( document, [jQuery]);
+				readyList.fireWith( document, [jQuery]);    //从回调缓存的列表里面执行一个回调
 
 				if( jQuery.fn.trigger )
 				{
 					jQuery(document).trigger('ready').off('ready');
 				}
+			},
+			makeArray: function(){
+				//不是数组或伪数组,调push
+				//是数组或伪数组，jQuery.merge()
+			},
+			inArray: function(){
+				//indexOf
+			},
+			merge: function(){
+
+			},
+			each: function(){
+				//如果是对象，调for ... in
+				//如果是数组或伪数组，for 循环
+			},
+			map: function(){
+
+			},
+			grep: function(){
+				//对数组来实现的
+			}
+		});
+
+		//回调对象
+		jQuery.Callbacks = function(flags){
+			//处理flags；
+			flags = ( flagCache[flags] || createFlags(flags) ) || {};
+
+			var list = [];
+			stack = [];
+			var memory, firing;
+
+			add = function(args){
+				for(var i = 0; i < args.length; i++)
+				{
+					elem = args[i];
+					type = jQuery.type( elem );
+					if(type == 'function')
+					{
+						if( !jQuery.unique || !self.has(elem) )
+						{
+							list.push(elem);
+						}
+					} else if( type == 'array')
+					{
+						add(elem);
+					}
+				}
+				return this;
+			};
+
+			fire = function(){
+
+			};
+
+			self = {
+				add: function(){
+					if(list)
+					{
+						length = list.length;
+						add(arguments);
+						if(firing)
+						{
+							firingLength = list.length;
+						} else if( memory || memory !== true)   //memory此时是一个对象
+						{
+							firingStart = length;
+							fire( memory[0], memory[1]);
+						}
+					}
+					return this;
+				},
+				remove: function(){
+
+				},
+				empty: function(){
+					list = [];
+					return this;
+				},
+				has : function(fn){
+					if(list)    //调用disable之后，list 为undefined，因此has方法也不会执行
+					{
+						for(var i = 0; i < list.length; i++)
+						{
+							if(list[i] === fn)
+							{
+								return true;
+							}
+						}
+
+						return false;
+					}
+				}
+				fire: function(){
+					self.fireWith(this, arguments);
+					return this;
+				},
+				fireWith: function( context, args){
+					if(stack)
+					{
+						if(firing)
+						{
+							if(!flags.once)
+							{
+								stack.push([context, args]);
+							}
+						} else if( !(flags.once && memory))
+						{
+							fire( context, args );
+						}
+					}
+					return this;
+				},
+				lock: function(){
+					stack = undefined;   //不能执行fire操作
+					if(!memory || memory === true)    //memory的含义不是很懂
+					{
+						self.disable();
+					}
+					return this;
+				},
+				disable: function(){
+					stack = list = memory = undefined;
+					return this;
+				},
+				locked: function(){
+					return !stack;
+				}
+				fired: function(){
+					return !!fired;
+				}
+			}
+
+			return self;
+		}
+
+		$.extend({
+			Deferred: function( func ){
+				//三个回调对象，对应单个回调函数列表
+				doneList = $.Callbacks(' once memory');
+				failList = $.Callbacks(' once memory');
+				progressList = $.Callbacks(' memory');
+
+				state = 'pending';     //初始状态 
+
+				list = {
+					'resolve': doneList,
+					'reject' : failList,
+					'notify' : progressList
+				}
+
+				promise = {
+
+				},
+				deferred = promise.promise({});
+
+				for key in list
+				{
+					deferred[key] = list[key];
+					deferred[key + 'With'] = list[key + 'With'];
+				}
+
+				deferred.done(function(){
+					state = 'resolve';
+				}, failList.disable(), progressList.lock()).fail(function(){
+					state = 'reject'
+				}, doneList.disable(), progress.lock());
+
+				if(func)
+				{
+					func.apply( deferred, deferred);
+				}
+			},
+			when: function(){
+
 			}
 		})
 			
 
 
 		window.$ = window.jQuery = jQuery;
+		}
 	})();	
 })(window);
